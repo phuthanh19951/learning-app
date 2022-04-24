@@ -1,3 +1,4 @@
+import { Container, Box } from '@mui/material';
 import React from 'react';
 import './style.scss';
 
@@ -8,9 +9,9 @@ type MobileLayoutProps = {
 const MobileLayout = ({ children }: MobileLayoutProps) => {
     return (
         <div className="mobile-layout">
-            <div className="container">
+            <Box sx={{ position: 'relative', height: '92vh' }}>
                 {children}
-            </div>
+            </Box>
         </div>
     );
 };

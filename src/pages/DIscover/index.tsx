@@ -58,7 +58,7 @@ const Discover = props => {
     };
 
     return (
-        <div className="home">
+        <div className="discover">
             <div className="user-section">
                 {
                     users && users.length > 0 ?

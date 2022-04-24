@@ -30,8 +30,7 @@ const LikedHistory = () => {
                                     loading="lazy"
                                 />
                                 <ImageListItemBar
-                                    title={user.firstName + '' + user.lastName}
-                                    subtitle={user.title}
+                                    title={user.title.toUpperCase() + '.' + user.firstName + '' + user.lastName}
                                 />
                             </ImageListItem>
                         ))
