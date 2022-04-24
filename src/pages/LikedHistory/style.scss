@@ -1,3 +1,13 @@
-.image-list {
+.likes-history {
     height: 544px;
+
+    .MuiImageList-root {
+        max-height: 544px;
+
+        .MuiImageListItem-root {
+            .MuiImageListItem-img {
+                object-fit: unset !important;
+            }
+        }
+    }
 }

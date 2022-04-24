@@ -1,48 +1,49 @@
 import { Avatar } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getCurrentUser } from '../../utils/localStorage';
 import './style.scss';
 
 const MatchesHistory = (props) => {
+    const currentUser = getCurrentUser();
+    const [matchedUsers, setMatchedUsers] = useState([]);
+
     useEffect(() => {
-        // fetch("https://dummyapi.io/data/v1/user?limit=1", {
-        // headers: {
-        //     "app-id": "6263e7a412d916608619e0e5"
-        // }
-        // }).then(response => response.json())
-        // .then(json => console.log(json));
+        fetch(`http://localhost:3000/users/${currentUser.id}/match`)
+            .then(response => response.json())
+            .then(result => {
+                setMatchedUsers(result.data)
+            });
     }, []);
 
     return (
         <div className='matches-history'>
             <div className='matches-user'>
-                <ul className='matches-user__list'>
-                    <li className='matches-user__item'>
-                        <div className='avatar'>
-                            <Avatar
-                                alt="Remy Sharp"
-                                src="/static/images/avatar/1.jpg"
-                                sx={{ width: 56, height: 56 }}
-                            />
-                        </div>
-                        <div className='info'>
-                            <p> Huynh Phu Thanh </p>
-                            <p> 24 </p>
-                        </div>
-                    </li>
-                    <li className='matches-user__item'>
-                        <div className='avatar'>
-                            <Avatar
-                                alt="Remy Sharp"
-                                src="/static/images/avatar/1.jpg"
-                                sx={{ width: 56, height: 56 }}
-                            />
-                        </div>
-                        <div className='info'>
-                            <p> Huynh Phu Thanh </p>
-                            <p> 24 </p>
-                        </div>
-                    </li>
-                </ul>
+                {
+                    matchedUsers.length > 0 ?
+                        <ul className='matches-user__list'>
+                            {
+                                matchedUsers.map((user: any, index: number) => {
+                                    return (
+                                        <li className='matches-user__item' key={index + 1}>
+                                            <div className='avatar'>
+                                                <Avatar
+                                                    alt="Remy Sharp"
+                                                    src={user.picture}
+                                                    sx={{ width: 56, height: 56 }}
+                                                />
+                                            </div>
+                                            <div className='info'>
+                                                <p> {user.firstName + '' + user.lastName} </p>
+                                                <p> Title: {user.title} </p>
+                                            </div>
+                                        </li>
+                                    )
+                                })
+
+                            }
+                        </ul>
+                        : <h4> There are no users who matched with you </h4>
+                }
             </div>
         </div>
     );
