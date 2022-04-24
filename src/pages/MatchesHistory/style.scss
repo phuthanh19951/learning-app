@@ -1,0 +1,18 @@
+.matches-history {
+    .matches-user {
+
+        &__list {
+            padding: 16px;
+        }
+
+        &__item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+
+            .info {
+                margin-left: 16px;
+            }
+        }
+    }
+}
